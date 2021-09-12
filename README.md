@@ -1,5 +1,6 @@
+[README_en](https://github.com/damkh/mail_notifications_to_matrix/blob/main/README_en.md)  
+
 # Mail notifications to Matrix
-[README_en](https://github.com/damkh/mail_notifications_to_matrix/blob/main/README_en.md)
 Код, представленный здесь, позволит настроить уведомления о новых письмах в чат [Matrix](https://matrix.org).
 
 ## Описание

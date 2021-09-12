@@ -1,4 +1,10 @@
 # Mail notifications to Matrix
+[README_en](https://github.com/damkh/mail_notifications_to_matrix/blob/main/README_en.md)
+Код, представленный здесь, позволит настроить уведомления о новых письмах в чат [Matrix](https://matrix.org).
+
+## Описание
+Почтовый сервер работает на базе [Dovecot](https://www.dovecot.org/). Для работы почтовых фильтров используется дополнение [Dovecot Pigeonhole Sieve](https://doc.dovecot.org/configuration_manual/sieve/). При получении нового письма фильтр вызывает скрипт send_msg_to_matrix.sh и передает ему значения полей "От", "Кому" и "Тема". Скрипт получает данные, обрабатывает их и при помощи curl отправляет сообщение в Matrix-чат. Для отправки сообщение в чат необходимо иметь адрес matrix-сервера, access token пользователя и id комнаты.
+
 ## Dovecot
 Для работы дополнений в sieve-скриптах, необходимо дописать информацию о них в конфиг-файлы dovecot:  
 #### /etc/dovecot/conf.d/90-sieve.conf:  

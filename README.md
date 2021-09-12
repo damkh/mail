@@ -1,4 +1,5 @@
-# Dovecot
+# Mail notifications to Matrix
+## Dovecot
 Для работы дополнений в sieve-скриптах, необходимо дописать информацию о них в конфиг-файлы dovecot:  
 #### /etc/dovecot/conf.d/90-sieve.conf:  
 ```
@@ -14,7 +15,7 @@ plugin {
 ```
 После изменений необходимо перечитать конфигурацию dovecot
 
-# Фильтры Sieve
+## Фильтры Sieve
 Для обработки писем необходимо создать фильтр, исполняющий скрипт send_msg_to_matrix.sh из директории /usr/lib/dovecot/sieve-execute (это рабочая директория dovecot).
 ```
 require ["fileinto", "mime", "variables", "extracttext", "copy", "envelope", "vnd.dovecot.execute", "foreverypart"];
@@ -86,7 +87,7 @@ if header :matches "subject" "*"
 execute :output "notify_matrix" "send_msg_to_matrix.sh" ["${from}", "${subject}", "${to}"];
 ```
 
-# Скрипт send_msg_to_matrix.sh
+## Скрипт send_msg_to_matrix.sh
 Данный скрипт получает и обрабатывает заголовки письма и отправляет их в определенную комнату matrix-сервера в формате:
 ```
 От кого: ...
@@ -105,7 +106,7 @@ then
 fi
 ```
 
-# Алгоритм внедрения
+## Алгоритм внедрения
 Пусть пользователь user01 имеет почтовый ящик user01@myexample.com. Он хочет получать уведомления в matrix о новых письмах.  
 Для этого необходимо:
 - Создать служебного пользователя на matrix-сервере (например, @mail-matrix:matrix.myexample.com) и получить его ACCESS_TOKEN
@@ -116,7 +117,6 @@ fi
 - - ACCESS_TOKEN
 - - IF-блок с соответствием ROOM_ID почтовому ящику пользователя
 
-# Логирование
+## Логирование
 Для логирования данных, получаемых скриптом необходимо создать файл, указанный в переменной DEBUG_LOG=/var/log/mail.debug и выдать ему полные права (`chmod 777 /var/log/mail.debug`).
-
 
